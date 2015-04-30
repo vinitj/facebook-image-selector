@@ -4,12 +4,8 @@ var React = require('react'),
 	qs = require('query-string'),
 	Stylesheet = require('./Stylesheet'),
 	FacebookImageSelector, ImageLoader,
-	requireAssets = require('require-assets'),
 	loginCounter = true,
 	ErrorMessages;
-
-var bootstrapURL = requireAssets('../css/facebookImageSelector.css');
-console.log(bootstrapURL);
 
 ErrorMessages =  {
 	"default" : "Some error occured while loading, Please try again after some time.",
@@ -62,7 +58,7 @@ FacebookImageSelector = React.createClass({
 	componentDidMount: function () {
 		var self = this, appId = self.getAppId();
 		window.addEventListener("keyup", this.escapeListener, false);
-		this.loadStylesheet('../css/facebookImageSelector.css');
+		this.loadStylesheet('https://raw.githubusercontent.com/vinitj/facebook-image-selector/master/css/facebookImageSelector.css');
 		if (appId) {
 			window.fbAsyncInit = function() {
 				FB.init({
