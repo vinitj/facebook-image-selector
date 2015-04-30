@@ -5,7 +5,7 @@ Facebook Photo selector widget in reactjs
 
 Install via npm:
 
-    % npm install git+https://github.com/vinitj/facebook-image-selector.git
+    % npm install facebook-image-selector
     
 
 ## Usage
