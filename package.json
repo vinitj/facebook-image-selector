@@ -24,7 +24,7 @@
     "async": "^0.9.0",
     "query-string": "^1.0.0",
     "react": "^0.13.2",
-    "require-assets": "file:../../../../var/folders/4t/jfy_c4216jv7v49g4z8hr3ncl_5vs9/T/npm-13345-448af1f8/1430388958714-0.32361988187767565/3b430f9104efec9bb0e28b46ccaf28aedc01601d",
+    "require-assets": "git+https://github.com/andreypopp/require-assets.git",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
