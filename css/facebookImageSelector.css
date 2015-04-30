@@ -8,6 +8,12 @@
   flex-flow: row wrap;
   justify-content: flex-start;
 }
+.facebookImageSelector {
+  box-sizing: border-box;
+}
+.facebookImageSelector * {
+  box-sizing: border-box;
+}
 .facebookImageSelector .fblogin {
   cursor: pointer;
 }
