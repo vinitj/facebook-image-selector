@@ -44,7 +44,7 @@ FacebookImageSelector = React.createClass({
 	},
 
 	getAppId: function () {
-		var appId = self.props.appId, appIdinInteger;
+		var appId = this.props.appId, appIdinInteger;
 		if (appId) {
 			var appIdinInteger = parseInt(appId, 10);
 			if (!(isNaN(appIdinInteger))) {
@@ -56,7 +56,7 @@ FacebookImageSelector = React.createClass({
 	},
 
 	componentDidMount: function () {
-		var self = this, appId = this.getAppId();
+		var self = this, appId = self.getAppId();
 		window.addEventListener("keyup", this.escapeListener, false);
 		this.loadStylesheet('/css/facebookImageSelector.css');
 		if (appId) {
