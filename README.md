@@ -9,6 +9,9 @@ Install via npm:
 
 ## Usage
 
+Library expects two mandatory props and one optional props. The mandatory ones includes appId as string and onSelection as function which contains file object (blob) as parameter. 
+The optional one is a text which basically shows up on UI on initially Load.
+
   var React = require('react'),
   	FacebookUploader = require('facebook-image-selector'),
   	Component;
@@ -16,8 +19,14 @@ Install via npm:
   Component = React.createClass({
   
   	render : function () {
-  		return (<FacebookUploader appId={} clickText="" onSelection=/>);
+  		return (<FacebookUploader appId={} clickText="" onSelection={this.handle}/>);
+  	},
+  	handle : function (file) {
+  	    console.log(file);
   	}
   });
+  
+ 
+
 
   
