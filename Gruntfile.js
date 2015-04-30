@@ -26,10 +26,20 @@ module.exports = function (grunt) {
                 }
             }
         },
+        browserify: {
+            options: {
+                transform: [ require('grunt-react').browserify ]
+            },
+            client: {
+                src: ['lib/FacebookImageSelector.js'],
+                dest: './bundle.js'
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-react');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-browserify');
 
-    grunt.registerTask('default', ['react', 'less']);
+    grunt.registerTask('default', ['react', 'less', 'browserify']);
 };
