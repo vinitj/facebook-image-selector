@@ -2,7 +2,7 @@
   "name": "facebook-image-selector",
   "version": "0.0.1",
   "description": "Facebook Photo selector widget in reactjs",
-  "main": "lib/index.js",
+  "main": "lib/FacebookImageSelector.js",
   "repository" : { "type" : "git",
       "url" : "https://github.com/vinitj/facebook-image-selector.git"
   },
