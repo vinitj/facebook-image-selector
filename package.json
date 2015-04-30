@@ -1,0 +1,30 @@
+{
+  "name": "facebook-image-selector",
+  "version": "0.0.1",
+  "description": "Facebook Photo selector widget in reactjs",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "facebook",
+    "photo",
+    "selector",
+    "reactjs",
+    "graph",
+    "api"
+  ],
+  "author": "Vinit Jain <vinitjain16@gmail.com> (https://github.com/vinitj)",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^0.9.0",
+    "query-string": "^1.0.0",
+    "react": "^0.13.2",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-react": "^0.12.2",
+    "grunt-contrib-less": "1.0.0"
+  }
+}
