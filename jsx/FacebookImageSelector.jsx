@@ -259,7 +259,7 @@ FacebookImageSelector = React.createClass({
 				</div>
 			);
 		} else {
-			return (<div className="facebookImageSelector">{ErrorMessages.noAppId}</div>);
+			return (<div className="facebookImageSelector noAppId">{ErrorMessages.noAppId}</div>);
 		}
 	}
 });
