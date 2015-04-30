@@ -266,7 +266,7 @@ FacebookImageSelector = React.createClass({
 							type = {state.albumsLoaded} closeOverlay={this.closeOverlay} itemSelector={this.itemSelector} albumSelector={this.getAlbumData}
 							isError={state.showError} loadMore={this.getMoreItems} customError={state.customError}
 							paging={(state.albumsLoaded) ? state.albumPaging : state.photoPaging} /> : ''}
-					<div className='fblogin' onClick={this.handleFacebookImageSelector}>{this.props.clickText}</div>
+					<div className='fbImageSelectorText' onClick={this.handleFacebookImageSelector}>{this.props.clickText}</div>
 				</div>
 			);
 		} else {

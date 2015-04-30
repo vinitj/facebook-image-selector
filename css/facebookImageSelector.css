@@ -14,7 +14,7 @@
 .facebookImageSelector * {
   box-sizing: border-box;
 }
-.facebookImageSelector .fblogin {
+.facebookImageSelector .fbImageSelectorText {
   cursor: pointer;
 }
 .facebookImageSelector.noAppId {
