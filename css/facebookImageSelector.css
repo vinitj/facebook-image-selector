@@ -60,7 +60,7 @@
   height: 450px;
   position: relative;
 }
-.facebookImageSelector .overlay .content section div.block {
+.facebookImageSelector .overlay .content section div.block-parent {
   height: 100%;
 }
 .facebookImageSelector .overlay .content section div.block-container-error {
