@@ -363,7 +363,7 @@ ImageLoader = React.createClass({
 							</div>
 							: <div className="heading"><div>Select an album</div></div>
 						}
-						<div>
+						<div className="block">
 						{(props.isError) ? <div className="block-container-error">{props.customError}</div> :
 								<div className="block-container" ref="dataNode">
 									{allAlbums}

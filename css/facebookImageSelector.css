@@ -60,6 +60,9 @@
   height: 450px;
   position: relative;
 }
+.facebookImageSelector .overlay .content section div.block {
+  height: 100%;
+}
 .facebookImageSelector .overlay .content section div.block-container-error {
   color: #3B5998;
   font-weight: 500;
