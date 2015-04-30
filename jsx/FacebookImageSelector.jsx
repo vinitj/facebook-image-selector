@@ -4,12 +4,14 @@ var React = require('react'),
 	qs = require('query-string'),
 	Stylesheet = require('../lib/Stylesheet'),
 	FacebookImageSelector, ImageLoader,
+	loginCounter = true,
 	ErrorMessages;
 
 ErrorMessages =  {
 	"default" : "Some error occured while loading, Please try again after some time.",
-	"notLoggedin" : "You are not logged in!. Please log on",
-	"unauthorized" : "You have not authorized this app!. Please provide the required permission (user_photos)"
+	"notLoggedin" : "You are not logged in!. Please log into Facebook",
+	"unauthorized" : "You have not authorized this app!. Please provide the required permission (user_photos)",
+	"noAppId" : "No App Id specified"
 };
 
 FacebookImageSelector = React.createClass({
@@ -17,6 +19,12 @@ FacebookImageSelector = React.createClass({
 	displayName: "FacebookImageSelector",
 
 	mixins: [Stylesheet],
+
+	getDefaultProps: function () {
+		return {
+			clickText: "Upload Image via Facebook"
+		};
+	},
 
 	defaultState: function () {
 		return {
@@ -37,26 +45,29 @@ FacebookImageSelector = React.createClass({
 
 
 	componentDidMount: function () {
+		var self = this;
 		window.addEventListener("keyup", this.escapeListener, false);
 		this.loadStylesheet('/css/facebookImageSelector.css');
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId      : '182424375109898',
-				cookie     : true,  // enable cookies to allow the server to access
-				                // the session
-				xfbml      : true,  // parse social plugins on this page
-				version    : 'v2.3' // use version 2.1
-			});
-		}.bind(this);
+		if (self.props.appId) {
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId      : self.props.appId,
+					cookie     : true,  // enable cookies to allow the server to access
+					                // the session
+					xfbml      : true,  // parse social plugins on this page
+					version    : 'v2.3' // use version 2.1
+				});
+			}.bind(this);
 
-			// Load the SDK asynchronously
-		(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+				// Load the SDK asynchronously
+			(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		};
     },
 
     componentWillUnmount: function () {
@@ -70,11 +81,16 @@ FacebookImageSelector = React.createClass({
 		} else if (response.status === 'not_authorized') {
 			this.showError(ErrorMessages.unauthorized);
 		} else {
-			this.showError(ErrorMessages.notLoggedin);
+			if (loginCounter) {
+				FB.login(this.statusChangeCallback, {scope: 'user_photos', return_scopes: true});
+			} else {
+				loginCounter = false;
+				this.showError(ErrorMessages.notLoggedin);
+			}
 		}
 	},
 
-	handleClick: function() {
+	handleFacebookImageSelector: function() {
 		FB.getLoginStatus(this.statusChangeCallback, {scope: 'user_photos',
 			return_scopes: true
 		});
@@ -232,15 +248,19 @@ FacebookImageSelector = React.createClass({
 
 	render: function() {
 		var state = this.state;
-		return (
-			<div className="facebookImageSelector">
-				{(state.showOverlay) ?  <ImageLoader data={(state.albumsLoaded) ? state.albumDataLoaded : state.photoDataLoaded}
-						type = {state.albumsLoaded} closeOverlay={this.closeOverlay} itemSelector={this.itemSelector} albumSelector={this.getAlbumData}
-						isError={state.showError} loadMore={this.getMoreItems} customError={state.customError}
-						paging={(state.albumsLoaded) ? state.albumPaging : state.photoPaging} /> : ''}
-			<div className='fblogin' onClick={this.handleClick}>Upload Pictures via FB ...</div>
-			</div>
-		);
+		if (this.props.appId) {
+			return (
+				<div className="facebookImageSelector">
+					{(state.showOverlay) ?  <ImageLoader data={(state.albumsLoaded) ? state.albumDataLoaded : state.photoDataLoaded}
+							type = {state.albumsLoaded} closeOverlay={this.closeOverlay} itemSelector={this.itemSelector} albumSelector={this.getAlbumData}
+							isError={state.showError} loadMore={this.getMoreItems} customError={state.customError}
+							paging={(state.albumsLoaded) ? state.albumPaging : state.photoPaging} /> : ''}
+					<div className='fblogin' onClick={this.handleFacebookImageSelector}>{this.props.clickText}</div>
+				</div>
+			);
+		} else {
+			return (<div className="facebookImageSelector">{ErrorMessages.noAppId}</div>);
+		}
 	}
 });
 
