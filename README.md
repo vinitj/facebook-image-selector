@@ -6,6 +6,7 @@ Facebook Photo selector widget in reactjs
 Install via npm:
 
     % npm install git+https://github.com/vinitj/facebook-image-selector.git
+    
 
 ## Usage
 
@@ -27,7 +28,7 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
         });
         
   
-  CSS for the clickText can be changed according to ones requirement. Corresponding class is `fblogin` 
+  CSS for the clickText can be changed according to ones requirement. Corresponding class is `fbImageSelectorText` 
  
 
 
