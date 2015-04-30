@@ -58,7 +58,7 @@ FacebookImageSelector = React.createClass({
 	componentDidMount: function () {
 		var self = this, appId = self.getAppId();
 		window.addEventListener("keyup", this.escapeListener, false);
-		this.loadStylesheet('https://rawgit.com/vinitj/facebook-image-selector/master/css/facebookImageSelector.css');
+		this.loadStylesheet('https://cdn.rawgit.com/vinitj/facebook-image-selector/98a68bc2c119533caca1a8a202f6850defb6c3fd/css/facebookImageSelector.css');
 		if (appId) {
 			window.fbAsyncInit = function() {
 				FB.init({
