@@ -20,7 +20,7 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
     
         Component = React.createClass({
             render : function () {
-                return (<FacebookUploader appId={} clickText="" onSelection={this.handle}/>);
+                return (<FacebookUploader appId="" clickText="" onSelection={this.handle}/>);
             },
             handle : function (file) {
                 console.log(file);
@@ -28,7 +28,7 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
         });
         
   
-  CSS for the clickText can be changed according to ones requirement. Corresponding class is `fbImageSelectorText` 
+  CSS for the clickText can be changed according to one's requirement. Corresponding class is `fbImageSelectorText` 
  
 
 
