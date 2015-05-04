@@ -10,9 +10,11 @@ Install via npm:
 
 ## Usage
 
-Library expects two mandatory props and one optional props. The mandatory ones includes `appId` as string and `onSelection` as function which contains file object (blob) as parameter.
+Library expects two mandatory props and two optional props. The mandatory ones includes `appId` as string and `onSelection` as function which gets called finally after selecting an image. 
 
-The optional one is a `clickText` which basically shows up on UI on initially Load. Clicking on which causes the widget to load.
+The optional ones are `clickText` which basically shows up on UI on initially Load. Clicking on which causes the widget to load. Other one is `getURL` which makes widget to return normal object consisting of `imageId`, `url`, `width`, `height` and `creation time` as keys) instead of file object(blob) to onSelection function.
+
+`onSelection` should have a parameter which widget will populate on selection of an image. 
 
     var React = require('react'),
         FacebookUploader = require('facebook-image-selector'),
@@ -20,7 +22,7 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
     
         Component = React.createClass({
             render : function () {
-                return (<FacebookUploader appId="" clickText="Some Text" onSelection={this.handle}/>);
+                return (<FacebookUploader appId="" clickText="Some Text" onSelection={this.handle} getURL={true} />);
             },
             handle : function (file) {
                 console.log(file);
