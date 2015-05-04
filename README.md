@@ -20,7 +20,7 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
     
         Component = React.createClass({
             render : function () {
-                return (<FacebookUploader appId="" clickText="" onSelection={this.handle}/>);
+                return (<FacebookUploader appId="" clickText="Some Text" onSelection={this.handle}/>);
             },
             handle : function (file) {
                 console.log(file);
@@ -30,6 +30,40 @@ The optional one is a `clickText` which basically shows up on UI on initially Lo
   
   CSS for the clickText can be changed according to one's requirement. Corresponding class is `fbImageSelectorText` 
  
+
+To Load using `browserify`, one can use following example
+
+index.js:
+
+    var React = require('react'),
+        FacebookUploader = require('facebook-image-selector'),
+        Component;
+    
+        Component = React.createClass({
+            render : function () {
+                return (<FacebookUploader appId="" clickText="Some Text" onSelection={this.handle}/>);
+            },
+            handle : function (file) {
+                console.log(file);
+            }
+        });
+        
+    React.render(<Component />, document.getElementById('fbload'));
+
+
+Run `browerify` to convert the file `browserify index.js -o bundle.js`
+
+Use it in the html accordingly, example :
+
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <div id="fbload"></div>
+        <script src="./bundle.js"></script>
+      </body>
+    </html>
+
+
 
 
   
