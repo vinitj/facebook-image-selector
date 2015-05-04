@@ -209,7 +209,7 @@ FacebookImageSelector = React.createClass({
 			imageSource = this.state.photoDataLoaded[id];
 			if (imageSource) {
 				if (this.props.getURL) {
-					self.props.onSelection(imageSource);
+					this.props.onSelection(imageSource);
 				} else {
 					this.getURLasFileObj(imageSource.source);
 				}
