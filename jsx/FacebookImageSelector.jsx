@@ -11,7 +11,8 @@ ErrorMessages =  {
 	"default" : "Some error occured while loading, Please try again after some time.",
 	"notLoggedin" : "You are not logged in!. Please log into Facebook",
 	"unauthorized" : "You have not authorized this app!. Please provide the required permission (user_photos)",
-	"noAppId" : "No App Id specified"
+	"noAppId" : "No App Id specified",
+	"noPhoto": "No Photos Available"
 };
 
 FacebookImageSelector = React.createClass({
@@ -126,7 +127,7 @@ FacebookImageSelector = React.createClass({
 
 	populateAlbums: function (response) {
 		/* get photo album images */
-		var task = {}, i, data = response.data, self = this, paging = response.paging;
+		var task = {}, i, data = response.data, self = this, paging = response.paging || null;
 		for (i in data) {
 			if (data.hasOwnProperty(i)) {
 				task[data[i].id] = function (temp) {
@@ -185,7 +186,7 @@ FacebookImageSelector = React.createClass({
 				if (response && !response.error) {
 					// modify data to support the need;
 					data = response.data;
-					paging = response.paging;
+					paging = response.paging || null;
 					for (i in data) {
 						if (data.hasOwnProperty(i)) {
 							modifiedResponse[data[i].id] = data[i];
@@ -233,8 +234,8 @@ FacebookImageSelector = React.createClass({
 	},
 
 	getMoreItems: function (paging, type) {
-		var cursor = paging.cursors, queries, pathSplitter, querySplitter;
-		if (paging.next) {
+		var cursor = (paging) ? paging.cursors : null, queries, pathSplitter, querySplitter;
+		if (paging && paging.next) {
 			querySplitter = paging.next.split("?");
 			if (querySplitter.length > 1) {
 				queries = qs.parse(querySplitter[1]);
@@ -252,6 +253,8 @@ FacebookImageSelector = React.createClass({
 			} else {
 				this.showError();
 			}
+		} else {
+			this.showError(ErrorMessages["noPhoto"]);
 		}
 	},
 
@@ -295,7 +298,8 @@ ImageLoader = React.createClass({
 	},
 
 	componentDidMount: function () {
-		if (this.props.paging.next) {
+		var paging = this.props.paging;
+		if (paging && this.props.paging.next) {
 			this.addScrollListener();
 		}
 	},
@@ -329,7 +333,7 @@ ImageLoader = React.createClass({
 
 	componentWillReceiveProps: function(nextProps) {
 		this.removeScrollEventListener();
-		if (nextProps.paging.next) {
+		if (nextProps.paging && nextProps.paging.next) {
 			this.addScrollListener();
 		}
 		this.setState({showSpinner : false, loadMoreDataSpinner: false});
@@ -371,9 +375,8 @@ ImageLoader = React.createClass({
 						}
 						<div className="block-parent">
 						{(props.isError) ? <div className="block-container-error">{props.customError}</div> :
-								<div className="block-container" ref="dataNode">
-									{allAlbums}
-								</div>
+								(allAlbums && allAlbums.length > 0) ? <div className="block-container" ref="dataNode">{allAlbums}</div> :
+									<div className="block-container-spinner">{ErrorMessages["noPhoto"]}</div>
 						}
 						{(state.showSpinner) ? <div className="block-container-spinner"><div className="loader"></div></div> : ''}
 						{(state.loadMoreDataSpinner) ? <div className="block-container-loadmore"><div className="loader"></div></div> : ''}
