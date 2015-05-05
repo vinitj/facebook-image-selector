@@ -64,7 +64,11 @@ Use it in the html accordingly, example :
       </body>
     </html>
 
+#Screenshots
 
+![Select Album](/screenshots/Albums.png?raw=true "Select Album")
+
+![Select Image](/screenshots/Photos.png?raw=true "Select Photos")
 
 
   
