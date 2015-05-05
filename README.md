@@ -1,7 +1,7 @@
 # facebook-image-selector
 Facebook Photo selector widget in reactjs
 
-#Screenshots
+## Screenshots
 
 ![Select Album](/screenshots/Albums.png?raw=true "Select Album")
 
