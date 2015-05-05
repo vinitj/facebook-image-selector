@@ -12,7 +12,7 @@ ErrorMessages =  {
 	"notLoggedin" : "You are not logged in!. Please log into Facebook",
 	"unauthorized" : "You have not authorized this app!. Please provide the required permission (user_photos)",
 	"noAppId" : "No App Id specified",
-	"noPhoto": "No Photos Available"
+	"noPhoto": "No Photos available in this album"
 };
 
 FacebookImageSelector = React.createClass({
@@ -376,7 +376,7 @@ ImageLoader = React.createClass({
 						<div className="block-parent">
 						{(props.isError) ? <div className="block-container-error">{props.customError}</div> :
 								(allAlbums && allAlbums.length > 0) ? <div className="block-container" ref="dataNode">{allAlbums}</div> :
-									<div className="block-container-spinner">{ErrorMessages["noPhoto"]}</div>
+									<div className="block-container-error">{ErrorMessages["noPhoto"]}</div>
 						}
 						{(state.showSpinner) ? <div className="block-container-spinner"><div className="loader"></div></div> : ''}
 						{(state.loadMoreDataSpinner) ? <div className="block-container-loadmore"><div className="loader"></div></div> : ''}
