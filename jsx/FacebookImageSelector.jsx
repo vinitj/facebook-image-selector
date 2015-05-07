@@ -384,7 +384,7 @@ ImageLoader = React.createClass({
 					</section>
 					<footer>
 						<div onClick={self.closeOverlay}>Cancel</div>
-						{(!props.type) ? <div className="selector" onClick={self.okSelector}>OK</div> : '' }
+						{(!props.type && allAlbums && allAlbums.length > 0x) ? <div className="selector" onClick={self.okSelector}>OK</div> : '' }
 					</footer>
 				</div>
 				<div className="cover"></div>
