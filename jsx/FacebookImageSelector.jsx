@@ -9,7 +9,7 @@ var React = require('react'),
 
 ErrorMessages =  {
 	"default" : "Some error occured while loading, Please try again after some time.",
-	"notLoggedin" : "You are not logged in!. Please log into Facebook",
+	"notLoggedin" : "You are not logged in!. Please log into Facebook and try again",
 	"unauthorized" : "You have not authorized this app!. Please provide the required permission (user_photos)",
 	"noAppId" : "No App Id specified",
 	"noPhoto": "No Photos available in this album"
@@ -65,8 +65,7 @@ FacebookImageSelector = React.createClass({
 			window.fbAsyncInit = function() {
 				FB.init({
 					appId      : appId,
-					cookie     : true,  // enable cookies to allow the server to access
-					                // the session
+					cookie     : true,
 					xfbml      : true,  // parse social plugins on this page
 					version    : 'v2.3' // use version 2.1
 				});
@@ -94,17 +93,13 @@ FacebookImageSelector = React.createClass({
 		} else if (response.status === 'not_authorized') {
 			this.showError(ErrorMessages.unauthorized);
 		} else {
-			if (loginCounter) {
-				FB.login(this.statusChangeCallback, {scope: 'user_photos', return_scopes: true});
-			} else {
-				loginCounter = false;
-				this.showError(ErrorMessages.notLoggedin);
-			}
+			// No idea what to do so just handle gracefully
+			//this.showError(ErrorMessages.notLoggedin);
 		}
 	},
 
 	handleFacebookImageSelector: function() {
-		FB.getLoginStatus(this.statusChangeCallback, {scope: 'user_photos',
+		FB.login(this.statusChangeCallback, {scope: 'user_photos', auth_type: 'rerequest',
 			return_scopes: true
 		});
 	},
@@ -384,7 +379,7 @@ ImageLoader = React.createClass({
 					</section>
 					<footer>
 						<div onClick={self.closeOverlay}>Cancel</div>
-						{(!props.type && allAlbums && allAlbums.length > 0x) ? <div className="selector" onClick={self.okSelector}>OK</div> : '' }
+						{(!props.type && allAlbums && allAlbums.length > 0) ? <div className="selector" onClick={self.okSelector}>OK</div> : '' }
 					</footer>
 				</div>
 				<div className="cover"></div>
@@ -400,7 +395,7 @@ ImageLoader = React.createClass({
 	albumSelector: function (e) {
 		var id = e.currentTarget.dataset.id, border = {};
 		if (this.props.type) {
-			this.selector(e);
+			this.selector(e); // Album selected
 		} else {
 			border[id] = true;
 			this.setState({isBorder: border, selectedId: id});
@@ -416,8 +411,10 @@ ImageLoader = React.createClass({
 	},
 
 	okSelector: function (e) {
-		this.setState({showSpinner: true});
-		this.props.itemSelector({id : this.state.selectedId, type: "photo"});
+		if (this.state.selectedId) {
+			this.setState({showSpinner: true});
+			this.props.itemSelector({id : this.state.selectedId, type: "photo"});
+		}
 	},
 
 	selector: function (e) {
