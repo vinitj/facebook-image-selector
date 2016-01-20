@@ -1,4 +1,7 @@
 # facebook-image-selector
+
+[![NPM](https://nodei.co/npm/facebook-image-selector.png?downloads=true&downloadRank=true)](https://nodei.co/npm/facebook-image-selector/)
+
 Facebook Photo selector widget in reactjs
 
 ## Screenshots
