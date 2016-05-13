@@ -1,4 +1,5 @@
 var React = require('react'),
+	ReactDOM = require('react-dom'),
 	async = require('async'),
 	_ = require('underscore'),
 	qs = require('query-string'),
@@ -313,14 +314,14 @@ ImageLoader = React.createClass({
 	}, 15),
 
 	removeScrollEventListener: function () {
-		var dataNode = React.findDOMNode(this.refs.dataNode);
+		var dataNode = ReactDOM.findDOMNode(this.refs.dataNode);
 		if (dataNode) {
 			dataNode.removeEventListener('scroll', this.updateModule);
 		}
 	},
 
 	addScrollListener: function () {
-		var dataNode = React.findDOMNode(this.refs.dataNode);
+		var dataNode = ReactDOM.findDOMNode(this.refs.dataNode);
 		if (dataNode) {
 			dataNode.addEventListener('scroll', this.updateModule, false);
 		}
